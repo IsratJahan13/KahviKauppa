@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Israt Cafe</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css" th:href="@{css/index.css}" />
+</head>
+<body>
+    <header class="header">
+        <div class="forFlex">
+            <div class="site-logo">
+                <img src="./images/cafeLogo.png" alt="logo">
+                <a href="index.html" th:href="@{/}" class="etu">Etusivu</a>
+            </div>
+            <nav class="nav">
+                <button class="menu-btn">&#9776;</button>
+                <ul class="nav-links">
+                    <li><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">KahviLaitteet</a></li>
+                    <li><a href="kulutusTuotteet.html" th:href="@{/kulutusTuotteet}">KulutusTuotteet</a></li>
+                    <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
+                    <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinointi (admin)</a></li>
+                </ul>
+            </nav>
+        </div>
+        <h1>Tervetuloa Isratin Cafeen</h1>
+        <h2>Kahvilaitteita ja kahvitteluun littyviä kulutustuotteita</h2>
+        <h3>Ota yhteyttä: <a href="mailto:israt.ict.cou@gmail.com">Israt Jahan</a></h3>
+    </header>
+    <main>
+        <section class="picture">
+            <img src="./images/cafeLogo.png" alt="img">
+        </section>
+        <section class="project_Section" id="projects">
+            <div class="project_Div">
+                <div class="card">
+                    <a href="images/img3.jpg" target="_blank"><img src="./images/capuccino.jpg" alt="sky"></a>
+                    <div class="container">
+                        <h3>Cappuccino</h3>
+                        <p>5.00 €</p>
+                        <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="images/banner2.jpg" target="_blank"><img src="./images/espresso.jpg" alt="timer"></a>
+                    <div class="container">
+                        <h3>Espresso</h3>
+                        <p>6.50 €</p>
+                        <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="images/img2.jpg" target="_blank"><img src="./images/americano.jpg" alt="car"></a>
+                    <div class="container">
+                        <h3>Americano</h3>
+                        <p>7.00 €</p>
+                        <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright @ Israt Cafe 2024</p>
+    </footer>
+</body>
+</html>

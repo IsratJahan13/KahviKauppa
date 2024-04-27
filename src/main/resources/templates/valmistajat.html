@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <title>Israt Cafe</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/valmistajat.css" th:href="@{css/valmistajat.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{css/table.css}" />
+</head>
+<body>
+    <header class="header">
+        <div class="forFlex">
+            <div class="site-logo">
+                <img src="./images/cafeLogo.png" alt="logo">
+                <a href="index.html" th:href="@{/}" class="etu">Etusivu</a>
+            </div>
+            <nav class="nav">
+                <button class="menu-btn">&#9776;</button>
+                <ul class="nav-links">
+                    <li><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">KahviLaitteet</a></li>
+                    <li><a href="kulutusTuotteet.html" th:href="@{/kulutusTuotteet}">KulutusTuotteet</a></li>
+                    <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
+                    <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinointi (admin)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="button_h1_flex">
+            <h1>Admin</h1>
+            <div class="btns">
+                <button class="btn tuotteet"><a href="admin.html" th:href="@{/admin}">Tuotteet</a></button>
+                <button class="btn valmistajat"><a href="valmistajat.html" th:href="@{/valmistajat}">Valmistajat</a></button>
+                <button class="btn toimittajat"><a href="toimittajat.html" th:href="@{/toimittajat}">Toimittajat</a></button>
+                <button class="btn osastot"><a href="osastot.html" th:href="@{/osastot}">Osastot</a></button>
+                <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
+            </div>
+        </div>
+        <form th:action="@{/valmistajat}" method="POST">
+            <h3>Lisää uusi valmistaja:</h3>
+            <div class="form_flex">
+                <label>Valmistajan nimi:</label>
+                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+            </div>
+            <div class="form_flex">
+                <label>Nettisivut:</label>
+                <input type="text" name="url" placeholder="" style="width: 20rem">
+            </div>
+            <button type="submit" value="submit" class="btn lisaa">Lisää</button>
+        </form>
+        <table>
+            <thead>
+              <tr>
+                <th>Valmistajan nimi</th>
+                <th>url</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="valmistaja:${valmistajat}">
+                <td th:text="${valmistaja.nimi}">nimi</td>
+                <td th:text="${valmistaja.url}">url</td>
+                <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaValmistaja/{id}(id=${valmistaja.id})}">Muokkaa</a></button></td>
+                <td><button class="muokkaJaPoistaBtn">Poistaa</button></td>
+              </tr>
+            </tbody>
+          </table>
+    </main>
+    <footer>
+        <p>Copyright @ Israt Cafe 2024</p>
+    </footer>
+</body>
+</html>

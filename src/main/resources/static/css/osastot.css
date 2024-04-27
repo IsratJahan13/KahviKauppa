@@ -1,0 +1,135 @@
+body, html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+    background-image: linear-gradient(rgba(0, 0, 0, .6), rgb(0, 0, 0, 0)), url("../images/beans.jpg");
+    height: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-attachment: fixed;    /* onScroll with background */
+}
+.nav {
+    position: relative;
+    z-index: 9999;
+}
+.menu-btn {
+    display: none;
+}
+.site-logo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.site-logo img{
+    margin: 1rem;
+    height: 4rem;
+    width: auto;
+}
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+.etu {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 14px 12px 14px 12px;
+    margin-top: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+.etu:hover {
+    background-color: rgb(91, 53, 28);
+    color: white;
+}
+.nav a {
+    color: white;
+    text-align: center;
+    padding: 14px 22px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.nav a:hover {
+    background-color: rgb(91, 53, 28);
+    color: white;
+}
+.forFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+nav a {
+    text-align: center;
+    padding: 17px 16px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.menu-btn {
+    display: none;
+}
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.btn {
+    background-color: rgb(91, 53, 28);
+    color: white;
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 1rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+.btn a {
+    color: white;
+    text-decoration: none;
+}
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.button_h1_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 4rem;
+}
+h3 {
+    margin: 1rem auto 1rem .3rem;
+    font-size: 1.6rem;
+}
+.osastot {
+    background-color: rgb(37, 5, 5);
+}
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 8rem 2rem 8rem;
+}
+.form_flex {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: .5rem;
+}
+.lisaa {
+    color: white;
+    width: 8rem;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(91, 53, 28);
+    padding: 1.5rem;
+    color: white;
+}
