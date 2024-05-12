@@ -80,6 +80,25 @@ public class KahviKauppaController {
         return "redirect:/valmistajat";
     }
 
+    @PostMapping("/poistaValmistaja")
+    public String deleteValmistaja(@RequestParam Long valmistajaId) {
+        // Find the toimittaja by ID
+        Optional<Valmistaja> optionalValmistaja = valmistajaRepo.findById(valmistajaId);
+
+        // Check if the toimittaja exists
+        if (optionalValmistaja.isPresent()) {
+            Valmistaja valmistaja = optionalValmistaja.get();
+
+            // Delete the toimittaja
+            valmistajaRepo.delete(valmistaja);
+        } else {
+            // Handle case where toimittaja is not found
+            // You might want to show an error message or redirect to an error page
+        }
+
+        return "redirect:/valmistajat";
+    }
+
     @GetMapping("/toimittajat")
     public String getToimittajat(Model model) {
         model.addAttribute("toimittajat", toimittajaRepo.findAll());

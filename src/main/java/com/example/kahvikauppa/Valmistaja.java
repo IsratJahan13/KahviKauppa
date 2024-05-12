@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,6 @@ public class Valmistaja extends AbstractPersistable<Long> {
     private String nimi;
     private String url;
 
-    @OneToMany(mappedBy = "valmistaja")
+    @OneToMany(mappedBy = "valmistaja", cascade = CascadeType.ALL)
     List<Tuote> tuotteet = new ArrayList<>();
 }
