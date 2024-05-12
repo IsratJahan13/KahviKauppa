@@ -66,11 +66,11 @@
                 <td th:text="${toimittaja.nimi}">nimi</td>
                 <td th:text="${toimittaja.yhteyshenkilo}">yhteyshenkilo</td>
                 <td th:text="${toimittaja.yhteyshenkilonEmail}">yhteyshenkilonEmail</td>
-                <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaToimittaja/{id} (id=${toimittaja.id})}">Muokkaa</a></button></td>
+                <td><button><a class="muokkaBtn" th:href="@{/muokkaaToimittaja/{id} (id=${toimittaja.id})}">Muokkaa</a></button></td>
                 <td>
                     <form th:action="@{/poistaToimittaja}" method="post">
                         <input type="hidden" name="toimittajaId" th:value="${toimittaja.id}" />
-                        <button type="submit" class="muokkaJaPoistaBtn">Poistaa</button>
+                        <button type="submit" class="poistaBtn">Poistaa</button>
                     </form>
                 </td>
               </tr>

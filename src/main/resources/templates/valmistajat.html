@@ -60,11 +60,11 @@
               <tr th:each="valmistaja:${valmistajat}">
                 <td th:text="${valmistaja.nimi}">nimi</td>
                 <td th:text="${valmistaja.url}">url</td>
-                <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaValmistaja/{id}(id=${valmistaja.id})}">Muokkaa</a></button></td>
+                <td><button><a class="muokkaBtn" th:href="@{/muokkaaValmistaja/{id}(id=${valmistaja.id})}">Muokkaa</a></button></td>
                 <td>
                     <form th:action="@{/poistaValmistaja}" method="post">
                         <input type="hidden" name="valmistajaId" th:value="${valmistaja.id}" />
-                        <button type="submit" class="muokkaJaPoistaBtn">Poistaa</button>
+                        <button type="submit" class="poistaBtn">Poistaa</button>
                     </form>
                 </td>
               </tr>

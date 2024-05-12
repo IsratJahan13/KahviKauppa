@@ -82,18 +82,15 @@ public class KahviKauppaController {
 
     @PostMapping("/poistaValmistaja")
     public String deleteValmistaja(@RequestParam Long valmistajaId) {
-        // Find the toimittaja by ID
+
         Optional<Valmistaja> optionalValmistaja = valmistajaRepo.findById(valmistajaId);
 
-        // Check if the toimittaja exists
         if (optionalValmistaja.isPresent()) {
             Valmistaja valmistaja = optionalValmistaja.get();
 
-            // Delete the toimittaja
             valmistajaRepo.delete(valmistaja);
         } else {
-            // Handle case where toimittaja is not found
-            // You might want to show an error message or redirect to an error page
+
         }
 
         return "redirect:/valmistajat";
@@ -188,6 +185,22 @@ public class KahviKauppaController {
         return "redirect:/osastot";
     }
 
+    @PostMapping("/poistaOsasto")
+    public String deleteOsasto(@RequestParam Long osastoId) {
+
+        Optional<Osasto> optionalOsasto = osastoRepo.findById(osastoId);
+
+        if (optionalOsasto.isPresent()) {
+            Osasto osasto = optionalOsasto.get();
+
+            osastoRepo.delete(osasto);
+        } else {
+
+        }
+
+        return "redirect:/osastot";
+    }
+
     @GetMapping("/admin")
     public String getAdmin(Model model) {
         model.addAttribute("tuotteet", tuotteetRepo.findAll());
@@ -252,6 +265,25 @@ public class KahviKauppaController {
             tuote.setValmistaja(valmistaja);
             tuotteetRepo.save(tuote);
         }
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/poistaTuote")
+    public String deleteTuote(@RequestParam Long tuoteId) {
+        // Find the Tuote by ID
+        Optional<Tuote> optionalTuote = tuotteetRepo.findById(tuoteId);
+
+        // Check if the Tuote exists
+        if (optionalTuote.isPresent()) {
+            Tuote tuote = optionalTuote.get();
+
+            // Delete the Tuote
+            tuotteetRepo.delete(tuote);
+        } else {
+            // Handle case where Tuote is not found
+            // You might want to show an error message or redirect to an error page
+        }
+
         return "redirect:/admin";
     }
 

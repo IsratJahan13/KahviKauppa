@@ -60,8 +60,13 @@
         <tr  th:each="osasto:${osastot}">
           <td th:text="${osasto.nimi}">nimi</td>
           <td th:text="${osasto.osastoIDP}">osastoIDP</td>
-          <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaOsasto/{id} (id=${osasto.id})}">Muokkaa</a></button></td>
-          <td><button class="muokkaJaPoistaBtn">Poistaa</button></td>
+          <td><button><a class="muokkaBtn" th:href="@{/muokkaaOsasto/{id} (id=${osasto.id})}">Muokkaa</a></button></td>
+          <td>
+            <form th:action="@{/poistaOsasto}" method="post">
+                <input type="hidden" name="osastoId" th:value="${osasto.id}" />
+                <button type="submit" class="poistaBtn">Poistaa</button>
+            </form>
+        </td>
         </tr>
       </tbody>
     </table>

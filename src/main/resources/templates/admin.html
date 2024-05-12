@@ -95,8 +95,13 @@
                 <td th:text="${tuote.osasto.nimi}">osasto</td>
                 <td th:text="${tuote.toimittaja.nimi}">toimittaja</td>
                 <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
-                <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaTuote/{id} (id=${tuote.id})}">Muokkaa</a></button></td>
-                <td><button class="muokkaJaPoistaBtn">Poistaa</button></td>
+                <td><button><a class="muokkaBtn" th:href="@{/muokkaaTuote/{id} (id=${tuote.id})}">Muokkaa</a></button></td>
+                <td>
+                    <form action="/poistaTuote" method="post">
+                        <input type="hidden" name="tuoteId" th:value="${tuote.id}" />
+                        <button type="submit" class="poistaBtn">Poistaa</button>
+                    </form>
+                </td>
               </tr>
             </tbody>
           </table>

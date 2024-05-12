@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
