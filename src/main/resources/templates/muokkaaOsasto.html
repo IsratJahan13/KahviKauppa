@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{css/admin.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{css/table.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{/css/table.css}" />
 </head>
 <body>
     <header class="header">
@@ -35,48 +35,17 @@
                 <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
             </div>
         </div>
-        <form action="">
-            <h3>Lisää tuote:</h3>
+        <form th:action="@{/muokkaaOsasto/{id}(id=${osasto.id})}" method="POST">
+            <h3>Muokkaa osaston tiedot:</h3>
             <div class="form_flex">
-                <label class="">Tuotteet nimi:</label>
-                <input type="text" placeholder="" style="width: 20rem">
+                <label>Osaston nimi:</label>
+                <input type="text" name="nimi" th:value="${osasto.nimi}" placeholder="" style="width: 20rem">
             </div>
             <div class="form_flex">
-                <label>Tuotteen hinta:</label>
-                <input type="text" placeholder="" style="width: 20rem">
+                <label>Osasto ID:</label>
+                <input type="text" name="osastoIDP" th:value="${osasto.osastoIDP}" placeholder="" style="width: 20rem">
             </div>
-            <div class="form_flex">
-                <label>Tuotteen kuvaus:</label>
-                <input type="text" style="height: 4rem; width: 20rem;">
-            </div>
-            <div class="form_flex">
-                <label>Osasto:</label>
-                <select name="osasto" style="width: 20rem">
-                    <option value="valitse_osasto">Valitse osasto</option>
-                    <option value="osasto1">Osasto 1</option>
-                    <option value="osasto2">Osasto 2</option>
-                    <option value="osasto3">Osasto 3</option>
-                </select>
-            </div>
-            <div class="form_flex">
-                <label>Toimittaja:</label>
-                <select name="toimittaja" style="width: 20rem">
-                    <option value="valitse_toimittaja">Valitse toimittaja</option>
-                    <option value="toimittaja1">Toimittaja 1</option>
-                    <option value="toimittaja2">Toimittaja 2</option>
-                    <option value="toimittaja3">Toimittaja 3</option>
-                </select>
-            </div>
-            <div class="form_flex">
-                <label>Valmistaja:</label>
-                <select name="valmistaja" style="width: 20rem">
-                    <option value="valitse_valmistaja">Valitse valmistaja</option>
-                    <option value="valmistaja1">Valmistaja 1</option>
-                    <option value="valmistaja2">Valmistaja 2</option>
-                    <option value="valmistaja3">Valmistaja 3</option>
-                </select>
-            </div>
-            <button type="submit" value="submit" class="btn">Päivitä tuotteen tiedot</button>
+            <button type="submit" value="submit" class="btn">Päivitää</button>
         </form>
     </main>
     <footer>

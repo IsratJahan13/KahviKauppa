@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{css/admin.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{css/table.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{/css/table.css}" />
 </head>
 <body>
     <header class="header">
@@ -35,71 +35,46 @@
                 <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
             </div>
         </div>
-        <form th:action="@{/admin}" enctype="multipart/form-data" method="POST">
-            <h3>Lisää tuote:</h3>
+        <form th:action="@{/muokkaaTuote/{id}(id=${tuote.id})}" method="POST">
+            <h3>Muokkaa tuotteen tiedot:</h3>
             <div class="form_flex">
-                <label class="">Tuotteen nimi:</label>
-                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+                <label>nimi:</label>
+                <input type="text" name="nimi" th:value="${tuote.nimi}" placeholder="" style="width: 20rem">
             </div>
             <div class="form_flex">
-                <label>Tuotteen hinta:</label>
-                <input type="text" placeholder="" name="hinta" style="width: 20rem">
+                <label>hinta:</label>
+                <input type="text" name="hinta" th:value="${tuote.hinta}" placeholder="" style="width: 20rem">
             </div>
             <div class="form_flex">
-                <label>Kuva:</label>
-                <input type="file" id="fileInput" name="kuva" accept="images/*" style="width: 20rem">
-            </div>
-            <div class="form_flex">
-                <label>Tuotteen kuvaus:</label>
-                <textarea type="text" placeholder="" name="kuvaus" style=" width: 20rem;" rows="8"></textarea>
+                <label>kuvaus:</label>
+                <textarea type="text" name="kuvaus" th:utext="${kuvaus}" placeholder="" style="width: 20rem" rows="8"></textarea>
             </div>
             <div class="form_flex">
                 <label>Osasto:</label>
                 <select name="osastoID" style="width: 20rem">
                     <option value="valitse_osasto">Valitse osasto</option>
-                    <option th:each="osasto : ${osastot}" th:value="${osasto.id}" th:text="${osasto.nimi}"></option>
+                    <option th:each="osasto : ${osastot}" th:value="${osasto.id}" th:text="${osasto.nimi}"
+                            th:selected="${tuote.osasto != null && tuote.osasto.id == osasto.id}"></option>
                 </select>
             </div>
             <div class="form_flex">
                 <label>Toimittaja:</label>
                 <select name="toimittajaID" style="width: 20rem">
                     <option value="valitse_toimittaja">Valitse toimittaja</option>
-                    <option th:each="toimittaja : ${toimittajat}" th:value="${toimittaja.id}" th:text="${toimittaja.nimi}"></option>
+                    <option th:each="toimittaja : ${toimittajat}" th:value="${toimittaja.id}" th:text="${toimittaja.nimi}"
+                            th:selected="${tuote.toimittaja != null && tuote.toimittaja.id == toimittaja.id}"></option>
                 </select>
             </div>
             <div class="form_flex">
                 <label>Valmistaja:</label>
                 <select name="valmistajaID" style="width: 20rem">
                     <option value="valitse_valmistaja">Valitse valmistaja</option>
-                    <option th:each="valmistaja : ${valmistajat}" th:value="${valmistaja.id}" th:text="${valmistaja.nimi}"></option>
+                    <option th:each="valmistaja : ${valmistajat}" th:value="${valmistaja.id}" th:text="${valmistaja.nimi}"
+                            th:selected="${tuote.valmistaja != null && tuote.valmistaja.id == valmistaja.id}"></option>
                 </select>
             </div>
-            <button type="submit" value="submit" class="btn lisaa">Lisää</button>
+            <button type="submit" value="submit" class="btn">Päivitää</button>
         </form>
-        <table>
-            <thead>
-              <tr>
-                <th>Tuotteen nimi</th>
-                <th>Hinta</th>
-                <th>Osasto</th>
-                <th>Toimittaja</th>
-                <th>Valmittaja</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="tuote:${tuotteet}">
-                <td th:text="${tuote.nimi}">nimi</td>
-                <td th:text="${tuote.hinta}">hinta</td>
-                <td th:text="${tuote.osasto.nimi}">osasto</td>
-                <td th:text="${tuote.toimittaja.nimi}">toimittaja</td>
-                <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
-                <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaTuote/{id} (id=${tuote.id})}">Muokkaa</a></button></td>
-                <td><button class="muokkaJaPoistaBtn">Poistaa</button></td>
-              </tr>
-            </tbody>
-          </table>
     </main>
     <footer>
         <p>Copyright @ Israt Cafe 2024</p>

@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/osastot.css" th:href="@{css/osastot.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{css/table.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{/css/table.css}" />
 </head>
 <body>
     <header class="header">
@@ -35,36 +35,22 @@
                 <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
             </div>
         </div>
-        <form th:action="@{/osastot}" method="POST">
-            <h3>Lisää osasto:</h3>
+        <form th:action="@{/muokkaaToimittaja/{id}(id=${toimittaja.id})}" method="POST">
+            <h3>Muokkaa toimittajan tiedot:</h3>
             <div class="form_flex">
-                <label>Osaston nimi:</label>
-                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+                <label>nimi:</label>
+                <input type="text" name="nimi" th:value="${toimittaja.nimi}" placeholder="" style="width: 20rem">
             </div>
             <div class="form_flex">
-                <label>Osasto ID:</label>
-                <input type="text" name="osastoIDP" placeholder="" style="width: 20rem">
+                <label>Yhteyshenkilön nimi:</label>
+                <input type="text" name="yhteyshenkilo" th:value="${toimittaja.yhteyshenkilo}" placeholder="" style="width: 20rem">
             </div>
-            <button type="submit" value="submit" class="btn lisaa">Lisää</button>
+            <div class="form_flex">
+                <label>Yhteyshenkilön email:</label>
+                <input type="text" name="yhteyshenkilonEmail" th:value="${toimittaja.yhteyshenkilonEmail}" placeholder="" style="width: 20rem">
+            </div>
+            <button type="submit" value="submit" class="btn">Päivitää</button>
         </form>
-            <table>
-      <thead>
-        <tr>
-          <th>Osaston nimi</th>
-          <th>Osasto ID</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr  th:each="osasto:${osastot}">
-          <td th:text="${osasto.nimi}">nimi</td>
-          <td th:text="${osasto.osastoIDP}">osastoIDP</td>
-          <td><button><a class="muokkaJaPoistaBtn" th:href="@{/muokkaaOsasto/{id} (id=${osasto.id})}">Muokkaa</a></button></td>
-          <td><button class="muokkaJaPoistaBtn">Poistaa</button></td>
-        </tr>
-      </tbody>
-    </table>
     </main>
     <footer>
         <p>Copyright @ Israt Cafe 2024</p>
