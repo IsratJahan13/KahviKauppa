@@ -105,6 +105,7 @@ h1 {
 .container p {
     font-style: italic;
     font-size: 0.8rem;
+    margin: .5rem 0rem 1rem 0rem;
 }
 .container a {
     text-decoration: none;

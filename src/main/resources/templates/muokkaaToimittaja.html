@@ -7,23 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{/css/table.css}" />
 </head>
 <body>
-    <header class="header">
-        <div class="forFlex">
-            <div class="site-logo">
-                <img src="./images/cafeLogo.png" alt="logo">
-                <a href="index.html" th:href="@{/}" class="etu">Etusivu</a>
-            </div>
-            <nav class="nav">
-                <button class="menu-btn">&#9776;</button>
-                <ul class="nav-links">
-                    <li><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">KahviLaitteet</a></li>
-                    <li><a href="kulutusTuotteet.html" th:href="@{/kulutusTuotteet}">KulutusTuotteet</a></li>
-                    <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
-                    <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinointi (admin)</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <header class="header" th:replace="~{admin::header}"></header>
     <main>
         <div class="button_h1_flex">
             <h1>Admin</h1>
@@ -52,8 +36,6 @@
             <button type="submit" value="submit" class="btn">Päivitää</button>
         </form>
     </main>
-    <footer>
-        <p>Copyright @ Israt Cafe 2024</p>
-    </footer>
+    <footer th:replace="~{index::footer}"></footer>
 </body>
 </html>

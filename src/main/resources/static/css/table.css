@@ -42,6 +42,7 @@ table tr:hover {
     border: none;
 }
 .poistaBtn {
+    background-color: rgb(234, 191, 139);
     color: red;
     text-decoration: none;
     border-radius: 3px;

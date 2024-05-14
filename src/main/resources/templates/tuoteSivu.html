@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <title>Israt Cafe</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/tuoteSivu.css" th:href="@{css/tuoteSivu.css}" />
+</head>
+<body>
+    <header class="header" th:replace="~{admin::header}"></header>
+    <main>
+        <div class="img">
+            <div class="container">
+                <h1>Cold brew</h1>
+                <p>Musta</p>
+                <p>65.00 €</p>
+                <img src="./images/ColdBrewMachine.jpg" alt=""><br>
+                <button class="takaisin"><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">Takaisin</a></button>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{index::footer}"></footer>
+</body>
+</html>
