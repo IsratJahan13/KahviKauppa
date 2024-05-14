@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +51,25 @@ public class TuoteController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/kuva/{id}")
+    public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
+        Tuote tuotePic = tuoteService.findById(id);
+        if (tuotePic != null && tuotePic.getKuva() != null) {
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(tuotePic.getKuva(), headers,
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/muokkaaTuote/{id}")
     public String getMuokkaaTuote(@PathVariable Long id, Model model) {
         Tuote tuote = tuoteService.findById(id);
+
+        String kuvaUrl = "/kuva/" + id;
         model.addAttribute("tuote", tuote);
+        model.addAttribute("kuvaUrl", kuvaUrl);
         model.addAttribute("kuvaus", tuote.getKuvaus());
         model.addAttribute("osastot", osastoService.osastoList());
         model.addAttribute("toimittajat", toimittajaService.toimittajaList());

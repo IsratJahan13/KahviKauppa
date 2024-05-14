@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,9 +71,14 @@ public class TuoteService {
         tuotteetRepo.save(tuote);
     }
 
+    public Tuote getProductImage(Long id) {
+        return tuotteetRepo.findById(id).orElse(null);
+    }
+
     public void getMuokkaaTuote(Long id, Model model) {
         Tuote tuote = tuotteetRepo.findById(id).orElse(null);
         model.addAttribute("tuote", tuote);
+        model.addAttribute("kuva", tuote.getKuva());
         model.addAttribute("kuvaus", tuote.getKuvaus());
         model.addAttribute("osastot", osastoRepo.findAll());
         model.addAttribute("toimittajat", toimittajaRepo.findAll());
