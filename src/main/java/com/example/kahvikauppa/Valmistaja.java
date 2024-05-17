@@ -20,6 +20,6 @@ public class Valmistaja extends AbstractPersistable<Long> {
     private String nimi;
     private String url;
 
-    @OneToMany(mappedBy = "valmistaja", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "valmistaja")
     List<Tuote> tuotteet = new ArrayList<>();
 }

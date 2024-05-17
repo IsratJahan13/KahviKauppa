@@ -62,13 +62,25 @@ public class TuoteService {
         tuote.setKuvaus(kuvaus);
 
         Osasto osasto = osastoRepo.findById(osastoID).orElse(null);
-        tuote.setOsasto(osasto);
-        Toimittaja toimittaja = toimittajaRepo.findById(toimittajaID).orElse(null);
-        tuote.setToimittaja(toimittaja);
-        Valmistaja valmistaja = valmistajaRepo.findById(valmistajaID).orElse(null);
-        tuote.setValmistaja(valmistaja);
+        if (osasto != null) {
+            // Set the Osasto object to the Tuote
+            tuote.setOsasto(osasto);
 
-        tuotteetRepo.save(tuote);
+            // Call the method to set osastoIDP for "kahvilaitteet"
+            // setOsastoIDPForKahvilaitteet(tuote);
+
+            // Retrieve and set Toimittaja and Valmistaja objects similarly
+            Toimittaja toimittaja = toimittajaRepo.findById(toimittajaID).orElse(null);
+            tuote.setToimittaja(toimittaja);
+            Valmistaja valmistaja = valmistajaRepo.findById(valmistajaID).orElse(null);
+            tuote.setValmistaja(valmistaja);
+
+            // Save the tuote
+            tuotteetRepo.save(tuote);
+        } else {
+            // Handle case where osasto is not found
+            // You might want to show an error message or redirect to an error page
+        }
     }
 
     public Tuote getProductImage(Long id) {
@@ -100,6 +112,7 @@ public class TuoteService {
                 tuote.setKuvaus(kuvaus);
                 Osasto osasto = osastoRepo.findById(osastoID).orElse(null);
                 tuote.setOsasto(osasto);
+                // setOsastoIDPForKahvilaitteet(tuote);
                 Toimittaja toimittaja = toimittajaRepo.findById(toimittajaID).orElse(null);
                 tuote.setToimittaja(toimittaja);
                 Valmistaja valmistaja = valmistajaRepo.findById(valmistajaID).orElse(null);
@@ -109,19 +122,55 @@ public class TuoteService {
         }
     }
 
+    // public void deleteTuote(Long tuoteId) {
+    // // Find the Tuote by ID
+    // Optional<Tuote> optionalTuote = tuotteetRepo.findById(tuoteId);
+
+    // // Check if the Tuote exists
+    // if (optionalTuote.isPresent()) {
+    // Tuote tuote = optionalTuote.get();
+
+    // // Delete the Tuote
+    // tuotteetRepo.delete(tuote);
+    // } else {
+    // // Handle case where Tuote is not found
+    // // You might want to show an error message or redirect to an error page
+    // }
+    // }
+
     public void deleteTuote(Long tuoteId) {
-        // Find the Tuote by ID
-        Optional<Tuote> optionalTuote = tuotteetRepo.findById(tuoteId);
+        tuotteetRepo.deleteById(tuoteId);
+    }
 
-        // Check if the Tuote exists
-        if (optionalTuote.isPresent()) {
-            Tuote tuote = optionalTuote.get();
+    // public List<Tuote> findAllProducts() {
+    // return tuotteetRepo.findAll();
+    // }
 
-            // Delete the Tuote
-            tuotteetRepo.delete(tuote);
-        } else {
-            // Handle case where Tuote is not found
-            // You might want to show an error message or redirect to an error page
-        }
+    public List<Tuote> findByOsastoOsastoIDP(Long osastoIDP) {
+        return tuotteetRepo.findByOsastoOsastoIDP(osastoIDP);
+    }
+
+    public List<Tuote> getKahvilaitteetProducts() {
+        // Assuming osastoIDP for "kahvilaitteet" is 1
+        Long kahvilaitteetOsastoIDP = 1L;
+        return tuotteetRepo.findByOsastoOsastoIDP(kahvilaitteetOsastoIDP);
+    }
+
+    public List<Tuote> getKulutustuotteetProducts() {
+        // Assuming osastoIDP for "kulutustuotteet" is 2
+        Long kulutustuotteetOsastoIDP = 2L;
+        return tuotteetRepo.findByOsastoOsastoIDP(kulutustuotteetOsastoIDP);
+    }
+
+    // public void setOsastoIDPForKahvilaitteet(Tuote tuote) {
+    // Osasto osasto = tuote.getOsasto();
+    // if (osasto != null && osasto.getOsastoIDP() == 0 &&
+    // "kahvilaitteet".equalsIgnoreCase(osasto.getNimi())) {
+
+    // }
+    // }
+
+    public List<Tuote> findAllByOsasto(Osasto osasto) {
+        return tuotteetRepo.findAllByOsasto(osasto);
     }
 }

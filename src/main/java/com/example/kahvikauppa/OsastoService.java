@@ -24,6 +24,10 @@ public class OsastoService {
     public void createOsasto(String nimi, Long osastoIDP) {
         Osasto osasto = new Osasto();
         osasto.setNimi(nimi);
+        if (osastoIDP != 0) {
+            Osasto parent = osastoRepo.findById(osastoIDP).orElse(null);
+            osasto.setParent(parent);
+        }
         osasto.setOsastoIDP(osastoIDP);
         osastoRepo.save(osasto);
     }
@@ -42,17 +46,25 @@ public class OsastoService {
         }
     }
 
+    // public void deleteOsasto(Long osastoId) {
+
+    // Optional<Osasto> optionalOsasto = osastoRepo.findById(osastoId);
+
+    // if (optionalOsasto.isPresent()) {
+    // Osasto osasto = optionalOsasto.get();
+
+    // osastoRepo.delete(osasto);
+    // } else {
+
+    // }
+
+    // }
+
     public void deleteOsasto(Long osastoId) {
+        osastoRepo.deleteById(osastoId);
+    }
 
-        Optional<Osasto> optionalOsasto = osastoRepo.findById(osastoId);
-
-        if (optionalOsasto.isPresent()) {
-            Osasto osasto = optionalOsasto.get();
-
-            osastoRepo.delete(osasto);
-        } else {
-
-        }
-
+    public Osasto getOne(Long id) {
+        return osastoRepo.getReferenceById(id);
     }
 }

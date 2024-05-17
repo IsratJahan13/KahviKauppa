@@ -47,17 +47,22 @@ public class ToimittajaService {
         }
     }
 
+    // public void deleteToimittaja(Long toimittajaId) {
+
+    // Optional<Toimittaja> optionalToimittaja =
+    // toimittajaRepo.findById(toimittajaId);
+
+    // if (optionalToimittaja.isPresent()) {
+    // Toimittaja toimittaja = optionalToimittaja.get();
+
+    // toimittajaRepo.delete(toimittaja);
+    // } else {
+
+    // }
+
+    // }
+
     public void deleteToimittaja(Long toimittajaId) {
-
-        Optional<Toimittaja> optionalToimittaja = toimittajaRepo.findById(toimittajaId);
-
-        if (optionalToimittaja.isPresent()) {
-            Toimittaja toimittaja = optionalToimittaja.get();
-
-            toimittajaRepo.delete(toimittaja);
-        } else {
-
-        }
-
+        toimittajaRepo.deleteById(toimittajaId);
     }
 }

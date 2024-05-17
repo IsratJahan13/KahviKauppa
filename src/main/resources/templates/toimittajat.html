@@ -9,6 +9,9 @@
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
+        <section th:if="${message}" th:class="${message.startsWith('Toimittaja poistettiin')? 'successMessage' : 'errorMessage'}">
+            <p th:text="${message}"></p>
+        </section>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">
@@ -23,15 +26,15 @@
             <h3>Lisää uusi toimittaja:</h3>
             <div class="form_flex">
                 <label>Toimittajan nimi:</label>
-                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+                <input type="text" name="nimi" placeholder="" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Yhteyshenkilö:</label>
-                <input type="text" name="yhteyshenkilo" placeholder="" style="width: 20rem">
+                <input type="text" name="yhteyshenkilo" placeholder="" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Yhteyshenkilön sähköposti:</label>
-                <input type="email" name="yhteyshenkilonEmail" style="width: 20rem;">
+                <input type="email" name="yhteyshenkilonEmail" style="width: 20rem;" required>
             </div>
             <button type="submit" value="submit" class="btn lisaa">Lisää</button>
         </form>
@@ -61,6 +64,6 @@
             </tbody>
           </table>
     </main>
-    <footer th:replace="~{index::footer}"></footer>
+    <footer th:replace="~{admin::footer}"></footer>
 </body>
 </html>

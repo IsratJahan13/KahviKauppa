@@ -83,7 +83,7 @@ h1 {
 .img {
     border: 1px solid black;
 }
-.grid-wrapper > div > img {
+.grid-wrapper > div > figure > img {
     width: 100%;
     height: 70%;
     object-fit: cover;

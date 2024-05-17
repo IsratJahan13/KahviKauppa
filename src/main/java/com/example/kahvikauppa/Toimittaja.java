@@ -22,6 +22,6 @@ public class Toimittaja extends AbstractPersistable<Long> {
     private String yhteyshenkilo;
     private String yhteyshenkilonEmail;
 
-    @OneToMany(mappedBy = "toimittaja", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "toimittaja")
     List<Tuote> tuotteet = new ArrayList<>();
 }

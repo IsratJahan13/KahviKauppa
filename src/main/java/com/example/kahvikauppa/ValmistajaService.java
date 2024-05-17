@@ -43,16 +43,19 @@ public class ValmistajaService {
         }
     }
 
+    // public void deleteValmistaja(Long valmistajaId) {
+
+    // Optional<Valmistaja> optionalValmistaja =
+    // valmistajaRepo.findById(valmistajaId);
+
+    // if (optionalValmistaja.isPresent()) {
+    // Valmistaja valmistaja = optionalValmistaja.get();
+
+    // valmistajaRepo.delete(valmistaja);
+    // }
+    // }
+
     public void deleteValmistaja(Long valmistajaId) {
-
-        Optional<Valmistaja> optionalValmistaja = valmistajaRepo.findById(valmistajaId);
-
-        if (optionalValmistaja.isPresent()) {
-            Valmistaja valmistaja = optionalValmistaja.get();
-
-            valmistajaRepo.delete(valmistaja);
-        } else {
-
-        }
+        valmistajaRepo.deleteById(valmistajaId);
     }
 }

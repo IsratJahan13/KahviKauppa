@@ -9,6 +9,9 @@
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
+        <section th:if="${message}" th:class="${message.startsWith('Valmistaja poistettiin')? 'successMessage' : 'errorMessage'}">
+            <p th:text="${message}"></p>
+        </section>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">
@@ -23,11 +26,11 @@
             <h3>Lisää uusi valmistaja:</h3>
             <div class="form_flex">
                 <label>Valmistajan nimi:</label>
-                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+                <input type="text" name="nimi" placeholder="" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Nettisivut:</label>
-                <input type="text" name="url" placeholder="" style="width: 20rem">
+                <input type="text" name="url" placeholder="" style="width: 20rem" required>
             </div>
             <button type="submit" value="submit" class="btn lisaa">Lisää</button>
         </form>
@@ -55,6 +58,6 @@
             </tbody>
           </table>
     </main>
-    <footer th:replace="~{index::footer}"></footer>
+    <footer th:replace="~{admin::footer}"></footer>
 </body>
 </html>

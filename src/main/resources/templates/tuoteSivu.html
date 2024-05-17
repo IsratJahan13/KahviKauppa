@@ -2,22 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/tuoteSivu.css" th:href="@{css/tuoteSivu.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/tuoteSivu.css" th:href="@{/css/tuoteSivu.css}" />
 </head>
 <body>
-    <header class="header" th:replace="~{admin::header}"></header>
+    <header th:replace="~{admin::header}" ></header>
     <main>
         <div class="img">
             <div class="container">
-                <h1>Cold brew</h1>
-                <p>Musta</p>
-                <p>65.00 €</p>
-                <img src="./images/ColdBrewMachine.jpg" alt=""><br>
+                <h1 th:text="${tuote.nimi}"></h1>
+                <p th:text="${tuote.kuvaus}"></p>
+                <p th:text="${tuote.hinta}"></p>
+                <figure>
+                    <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva">
+                </figure>
                 <button class="takaisin"><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">Takaisin</a></button>
             </div>
         </div>
     </main>
-    <footer th:replace="~{index::footer}"></footer>
+    <footer th:replace="~{admin::footer}"></footer>
 </body>
 </html>

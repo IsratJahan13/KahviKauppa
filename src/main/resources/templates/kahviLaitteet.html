@@ -8,83 +8,21 @@
 <body>
     <header th:replace="~{admin::header}" ></header>
     <main>
-        <h1>Kahvilaitteet</h1>
+        <h1 th:text="${depName}">Osasto</h1>
         <div class="grid-wrapper">
-            <div class="img">
-                <img src="./images/espressoMachine.jpg" alt="">
+            <div class="img" th:each="tuote : ${tuotteet}">
+                <figure>
+                    <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
+                </figure>
                 <div class="container">
-                    <h3>Espresso machine</h3>
-                    <p>355.00 €</p>
-                    <a href="tuoteSivu.html" th:href="@{/tuoteSivu}">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/brewMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Brew machine</h3>
-                    <p>120.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/dripCoffeeMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Drip Coffee Machine</h3>
-                    <p>250.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/filter-coffee-machine.jpg" alt="">
-                <div class="container">
-                    <h3>Filter coffee machine</h3>
-                    <p>295.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/GrinderMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Coffee grinder</h3>
-                    <p>115.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/powerOverMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Power over</h3>
-                    <p>59.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/ColdBrewMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Cold brew</h3>
-                    <p>65.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/coffeeMachine4.jpg" alt="">
-                <div class="container">
-                    <h3>Coffee maker</h3>
-                    <p>99.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
-                </div>
-            </div>
-            <div class="img">
-                <img src="./images/steamerMachine.jpg" alt="">
-                <div class="container">
-                    <h3>Steamer</h3>
-                    <p>159.00 €</p>
-                    <a href="tuoteSivu.html" target="_blank">Tuotesivu</a>
+                    <h3 th:text="${tuote.nimi}"></h3>
+                    <p th:text="${tuote.hinta}"></p>
+                    <a th:href="@{/tuote/{id}(id=${tuote.id})}">Tuotesivu</a>
                 </div>
             </div>
         </div>
         <button class="seurava">Seurava</button>
     </main>
-    <footer th:replace="~{index::footer}"></footer>
+    <footer th:replace="~{admin::footer}"></footer>
 </body>
 </html>

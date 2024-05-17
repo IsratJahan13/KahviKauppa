@@ -16,8 +16,8 @@
             <nav class="nav">
                 <button class="menu-btn">&#9776;</button>
                 <ul class="nav-links">
-                    <li><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet}">KahviLaitteet</a></li>
-                    <li><a href="kulutusTuotteet.html" th:href="@{/kulutusTuotteet}">KulutusTuotteet</a></li>
+                    <li><a th:href="@{/kahviLaitteet(id=1)}">KahviLaitteet</a></li>
+                    <li><a th:href="@{/kahviLaitteet(id=2)}">KulutusTuotteet</a></li>
                     <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
                     <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinointi (admin)</a></li>
                 </ul>
@@ -39,41 +39,42 @@
             <h3>Lisää tuote:</h3>
             <div class="form_flex">
                 <label class="">Tuotteen nimi:</label>
-                <input type="text" name="nimi" placeholder="" style="width: 20rem">
+                <input type="text" name="nimi" placeholder="" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Tuotteen hinta:</label>
-                <input type="text" placeholder="" name="hinta" style="width: 20rem">
+                <input type="text" pattern="\d+(\.\d{2})?" placeholder="xxx.xx" name="hinta" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Kuva:</label>
-                <input type="file" id="fileInput" name="kuva" accept="images/*" style="width: 20rem">
+                <input type="file" id="fileInput" name="kuva" accept="images/*" style="width: 20rem" required>
             </div>
             <div class="form_flex">
                 <label>Tuotteen kuvaus:</label>
-                <textarea type="text" placeholder="" name="kuvaus" style=" width: 20rem;" rows="8"></textarea>
+                <textarea type="text" placeholder="" name="kuvaus" style=" width: 20rem;" rows="8" required></textarea>
             </div>
             <div class="form_flex">
                 <label>Osasto:</label>
-                <select name="osastoID" style="width: 20rem">
+                <select name="osastoID" style="width: 20rem" required>
                     <option value="valitse_osasto">Valitse osasto</option>
                     <option th:each="osasto : ${osastot}" th:value="${osasto.id}" th:text="${osasto.nimi}"></option>
                 </select>
             </div>
             <div class="form_flex">
                 <label>Toimittaja:</label>
-                <select name="toimittajaID" style="width: 20rem">
+                <select name="toimittajaID" style="width: 20rem" required>
                     <option value="valitse_toimittaja">Valitse toimittaja</option>
                     <option th:each="toimittaja : ${toimittajat}" th:value="${toimittaja.id}" th:text="${toimittaja.nimi}"></option>
                 </select>
             </div>
             <div class="form_flex">
                 <label>Valmistaja:</label>
-                <select name="valmistajaID" style="width: 20rem">
+                <select name="valmistajaID" style="width: 20rem" required>
                     <option value="valitse_valmistaja">Valitse valmistaja</option>
                     <option th:each="valmistaja : ${valmistajat}" th:value="${valmistaja.id}" th:text="${valmistaja.nimi}"></option>
                 </select>
             </div>
+            <input type="hidden" name="osastoIDP" value="1"> <!-- Assuming osastoIDP for "kahvilaitteet" is 1 -->
             <button type="submit" value="submit" class="btn lisaa">Lisää</button>
         </form>
         <table>
