@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +26,10 @@ public class KahviKauppaController {
     }
 
     @GetMapping("/tuote/{id}")
-    public String tuoteDetails(@PathVariable Long id, Model model) {
+    public String tuoteDetails(@PathVariable Long id, @Param(value = "osastoId") long osastoId, Model model) {
         Tuote tuote = tuoteService.findById(id);
         model.addAttribute("tuote", tuote);
+        model.addAttribute("osastoId", osastoId);
         return "tuoteSivu";
     }
 
@@ -36,6 +38,7 @@ public class KahviKauppaController {
         List<Tuote> products = new ArrayList<>();
         Osasto department = osastoService.getOne(osastoId);
         model.addAttribute("depName", department.getNimi());
+        model.addAttribute("osastoId", osastoId);
 
         List<Osasto> departmentTree = getDepartmentsTree(department);
         for (Osasto os : departmentTree) {

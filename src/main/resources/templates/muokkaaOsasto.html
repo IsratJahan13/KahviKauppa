@@ -9,6 +9,9 @@
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="logoutBtn"/>
+        </form>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class OsastoController {
@@ -47,9 +48,17 @@ public class OsastoController {
     }
 
     @PostMapping("/poistaOsasto")
-    public String deleteOsasto(@RequestParam Long osastoId) {
+    public String deleteOsasto(@RequestParam Long osastoId, RedirectAttributes redirectAttributes) {
+        String message = "";
+        try {
+            this.osastoService.deleteOsasto(osastoId);
+            message = "Osasto poistettiin onnistuneesti tietokannasta.";
 
-        this.osastoService.deleteOsasto(osastoId);
+        } catch (Exception e) {
+            // Set error message to be displayed in the browser
+            message = "Osasto ei voitu poistaa, koska siihen liittyy tuotteita tietokannassa.";
+        }
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/osastot";
     }
 }

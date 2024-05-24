@@ -11,13 +11,13 @@
         <h1 th:text="${depName}">Osasto</h1>
         <div class="grid-wrapper">
             <div class="img" th:each="tuote : ${tuotteet}">
-                <figure>
+                <figure class="laitteetKuvia">
                     <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
                 </figure>
                 <div class="container">
                     <h3 th:text="${tuote.nimi}"></h3>
                     <p th:text="${tuote.hinta}"></p>
-                    <a th:href="@{/tuote/{id}(id=${tuote.id})}">Tuotesivu</a>
+                    <a th:href="@{/tuote/{id}(id=${tuote.id}, osastoId=${osastoId})}">Tuotesivu</a>
                 </div>
             </div>
         </div>

@@ -60,6 +60,6 @@ public class ToimittajaController {
             message = "Toimittaja ei voitu poistaa, koska siihen liittyy tuotteita tietokannassa.";
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/toimittaja";
+        return "redirect:/toimittajat";
     }
 }

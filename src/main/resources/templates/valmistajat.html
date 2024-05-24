@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/valmistajat.css" th:href="@{css/valmistajat.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/admin.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/table.css}" />
 </head>
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
-        <section th:if="${message}" th:class="${message.startsWith('Valmistaja poistettiin')? 'successMessage' : 'errorMessage'}">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="logoutBtn"/>
+        </form>
+        <section id="messageSection" th:if="${message}" th:class="${message.startsWith('Valmistaja poistettiin')? 'successMessage' : 'errorMessage'}">
             <p th:text="${message}"></p>
         </section>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">
                 <button class="btn tuotteet"><a href="admin.html" th:href="@{/admin}">Tuotteet</a></button>
-                <button class="btn valmistajat"><a href="valmistajat.html" th:href="@{/valmistajat}">Valmistajat</a></button>
+                <button class="btn valmistajat" style="background-color: #250505;"><a href="valmistajat.html" th:href="@{/valmistajat}">Valmistajat</a></button>
                 <button class="btn toimittajat"><a href="toimittajat.html" th:href="@{/toimittajat}">Toimittajat</a></button>
                 <button class="btn osastot"><a href="osastot.html" th:href="@{/osastot}">Osastot</a></button>
                 <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
@@ -59,5 +62,19 @@
           </table>
     </main>
     <footer th:replace="~{admin::footer}"></footer>
+    <script>
+        // Wait for the document to be ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the message section
+            var messageSection = document.getElementById('messageSection');
+            // If the message section exists
+            if (messageSection) {
+                // Set a timeout to hide the message after 2 seconds
+                setTimeout(function() {
+                    messageSection.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
