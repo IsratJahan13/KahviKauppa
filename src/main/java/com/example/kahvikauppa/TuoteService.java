@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -148,18 +151,6 @@ public class TuoteService {
 
     public List<Tuote> findByOsastoOsastoIDP(Long osastoIDP) {
         return tuotteetRepo.findByOsastoOsastoIDP(osastoIDP);
-    }
-
-    public List<Tuote> getKahvilaitteetProducts() {
-        // Assuming osastoIDP for "kahvilaitteet" is 1
-        Long kahvilaitteetOsastoIDP = 1L;
-        return tuotteetRepo.findByOsastoOsastoIDP(kahvilaitteetOsastoIDP);
-    }
-
-    public List<Tuote> getKulutustuotteetProducts() {
-        // Assuming osastoIDP for "kulutustuotteet" is 2
-        Long kulutustuotteetOsastoIDP = 2L;
-        return tuotteetRepo.findByOsastoOsastoIDP(kulutustuotteetOsastoIDP);
     }
 
     // public void setOsastoIDPForKahvilaitteet(Tuote tuote) {

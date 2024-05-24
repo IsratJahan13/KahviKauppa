@@ -8,6 +8,7 @@
 <body>
     <header th:replace="~{admin::header}" ></header>
     <main>
+        <p class="countOfProducts" th:text="'Tuotteet yhdessä: ' + ${kaikkiKahvilaitteet.size()}"></p>
         <h1 th:text="${depName}">Osasto</h1>
         <div class="grid-wrapper">
             <div class="img" th:each="tuote : ${tuotteet}">
@@ -21,7 +22,16 @@
                 </div>
             </div>
         </div>
-        <button class="seurava">Seurava</button>
+        <div th:if="${currentPage > 0}">
+            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
+                <button class="seurava">Edellinen</button>
+            </a>
+        </div>
+        <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
+            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage + 1})}">
+                <button class="seurava">Seuraava</button>
+            </a>
+        </div>
     </main>
     <footer th:replace="~{admin::footer}"></footer>
 </body>

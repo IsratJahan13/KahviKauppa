@@ -3,12 +3,15 @@ body, html {
 }
 .header {
     background-image: linear-gradient(rgba(0, 0, 0, .6), rgb(0, 0, 0, 0)), url("../images/beans.jpg");
-    height: 60%;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    background-attachment: fixed;    /* onScroll with background */
+    position: fixed;
+    top: 0;
+    width: 100%; /* Make the header span the entire width of the viewport */
+    height: 6rem;
+    z-index: 1000; /* Ensure the header appears above other elements */
 }
 .nav {
     position: relative;
@@ -74,6 +77,10 @@ nav a {
 }
 .menu-btn {
     display: none;
+}
+.countOfProducts {
+    padding: 1rem;
+    color: gray;
 }
 h1 {
     margin: 4rem 6rem 2rem 6rem;
