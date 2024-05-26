@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
@@ -45,30 +46,20 @@ public class KahviKauppaController {
         Osasto department = osastoService.getOne(osastoId);
         List<Osasto> departmentTree = getDepartmentsTree(department);
 
-        // Get all Tuote objects for the department tree
-        List<Tuote> allKahvilaitteet = new ArrayList<>();
-        for (Osasto os : departmentTree) {
-            allKahvilaitteet.addAll(tuoteService.findAllByOsasto(os));
-        }
-
-        // Paginate the Tuote objects
-        int start = page * pageSize;
-        int end = Math.min(start + pageSize, allKahvilaitteet.size());
-        List<Tuote> kahvilaitteetPage = (start < end) ? allKahvilaitteet.subList(start, end) : new ArrayList<>();
-        Page<Tuote> tuotePage = new PageImpl<>(kahvilaitteetPage, PageRequest.of(page, pageSize),
-                allKahvilaitteet.size());
+        // Use custom query to fetch paginated Tuote objects for the department tree
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Tuote> tuotePage = tuoteService.findByOsastoIn(departmentTree, pageable);
 
         model.addAttribute("depName", department.getNimi());
         model.addAttribute("osastoId", osastoId);
         model.addAttribute("totalPages", tuotePage.getTotalPages());
         model.addAttribute("currentPage", page);
         model.addAttribute("pageNumber", page + 1);
-        model.addAttribute("tuotteet", kahvilaitteetPage);
-        model.addAttribute("kaikkiKahvilaitteet", allKahvilaitteet);
+        model.addAttribute("tuotteet", tuotePage.getContent());
 
-        // Long kahvilaitteetOsastoIDP = 1L;
-        // model.addAttribute("tuotteet",
-        // tuoteService.findByOsastoOsastoIDP(kahvilaitteetOsastoIDP));
+        // Add count of products to the model
+        long totalKahviLaitteet = tuoteService.countTotalProducts(departmentTree);
+        model.addAttribute("totalKahviLaitteet", totalKahviLaitteet);
 
         return "kahviLaitteet";
     }

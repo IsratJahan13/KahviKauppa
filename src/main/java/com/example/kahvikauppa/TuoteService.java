@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -163,5 +164,24 @@ public class TuoteService {
 
     public List<Tuote> findAllByOsasto(Osasto osasto) {
         return tuotteetRepo.findAllByOsasto(osasto);
+    }
+
+    public Page<Tuote> findByOsastoIn(List<Osasto> osastot, Pageable pageable) {
+        return tuotteetRepo.findByOsastoIn(osastot, pageable);
+    }
+
+    // Method to get the count of products for a specific department
+    public long countProductsByOsasto(Osasto osasto) {
+        List<Tuote> tuotteet = findAllByOsasto(osasto);
+        return tuotteet.size();
+    }
+
+    // Method to get the total count of products for a list of departments
+    public long countTotalProducts(List<Osasto> osastot) {
+        long totalCount = 0;
+        for (Osasto osasto : osastot) {
+            totalCount += countProductsByOsasto(osasto);
+        }
+        return totalCount;
     }
 }

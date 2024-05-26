@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Israt Cafe</title>
     <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{css/reset.css}" />
@@ -7,8 +7,13 @@
 </head>
 <body>
     <header th:replace="~{admin::header}" ></header>
-    <main>
-        <p class="countOfProducts" th:text="'Tuotteet yhdessä: ' + ${kaikkiKahvilaitteet.size()}"></p>
+    <main class="main">
+        <div th:if="${currentPage > 0}">
+            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
+                <button class="edellinen">Edellinen</button>
+            </a>
+        </div>
+        <p class="countOfProducts" th:text="'Tuotteet yhdessä: ' + ${totalKahviLaitteet}"></p>
         <h1 th:text="${depName}">Osasto</h1>
         <div class="grid-wrapper">
             <div class="img" th:each="tuote : ${tuotteet}">
@@ -21,11 +26,6 @@
                     <a th:href="@{/tuote/{id}(id=${tuote.id}, osastoId=${osastoId})}">Tuotesivu</a>
                 </div>
             </div>
-        </div>
-        <div th:if="${currentPage > 0}">
-            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
-                <button class="seurava">Edellinen</button>
-            </a>
         </div>
         <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
             <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage + 1})}">
