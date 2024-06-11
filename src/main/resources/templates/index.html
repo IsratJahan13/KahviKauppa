@@ -9,15 +9,15 @@
     <header class="header">
         <div class="forFlex">
             <div class="site-logo">
-                <img src="./images/cafeLogo.png" alt="logo">
-                <a href="index.html" th:href="@{/}" class="etu">Etusivu</a>
+                <figure><img src="./images/cafeLogo.png" alt="logo"></figure>
             </div>
             <nav class="nav">
-                <button class="menu-btn">&#9776;</button>
+                <!-- <button class="menu-btn">&#9776;</button> -->
                 <ul class="nav-links">
+                    <li><a href="index.html" th:href="@{/}" class="etu">Etusivu</a></li>
                     <li><a href="kahviLaitteet.html" th:href="@{/kahviLaitteet(id=1)}">Kahvilaitteet</a></li>
                     <li><a href="kulutusTuotteet.html" th:href="@{/kahviLaitteet(id=2)}">Kulutustuotteet</a></li>
-                    <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
+                    <li><a href="vipAsiakas.html" th:href="@{/vipAsiakas}">Rekisteroidy VIP-asiakkaaksi</a></li>
                     <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinnointi (admin)</a></li>
                 </ul>
             </nav>
@@ -28,7 +28,7 @@
     </header>
     <main>
         <section class="picture">
-            <img src="./images/cafeLogo.png" alt="img">
+            <figure><img src="./images/cafeLogo.png" alt="img"></figure>
         </section>
         <section class="project_Section" id="projects">
             <div class="project_Div">
@@ -47,7 +47,7 @@
                 <div class="card">
                     <a href="admin.html" th:href="@{/admin}"><img src="./images/filter-springy.jpg" alt="americano"></a>
                     <div class="container">
-                        <a href="admin.html" th:href="@{/admin}"><h3>Tietojen hallinoninti</h3></a>
+                        <a href="admin.html" th:href="@{/admin}"><h3>Tietojen hallinnointi</h3></a>
                     </div>
                 </div>
             </div>

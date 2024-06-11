@@ -184,4 +184,8 @@ public class TuoteService {
         }
         return totalCount;
     }
+
+    public List<Tuote> searchProducts(String query, List<Osasto> osastot) {
+        return tuotteetRepo.findByNimiContainingIgnoreCaseAndOsastoIn(query, osastot);
+    }
 }

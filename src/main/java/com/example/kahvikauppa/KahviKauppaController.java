@@ -64,6 +64,27 @@ public class KahviKauppaController {
         return "kahviLaitteet";
     }
 
+    @GetMapping("/search")
+    public String searchProducts(Model model, @RequestParam("query") String query,
+            @RequestParam("osastoId") long osastoId) {
+        // Get the current department
+        Osasto department = osastoService.getOne(osastoId);
+        List<Osasto> departmentTree = getDepartmentsTree(department);
+
+        // Search products based on the query and department tree
+        List<Tuote> searchResults = tuoteService.searchProducts(query, departmentTree);
+
+        model.addAttribute("depName", department.getNimi() + " Search Results");
+        model.addAttribute("osastoId", osastoId);
+        model.addAttribute("tuotteet", searchResults);
+
+        // Add count of products to the model
+        long totalKahviLaitteet = tuoteService.countTotalProducts(departmentTree);
+        model.addAttribute("totalKahviLaitteet", totalKahviLaitteet);
+
+        return "kahviLaitteet";
+    }
+
     // @GetMapping("/kulutusTuotteet")
     // public String getKulutusTuotteet(Model model) {
     // Long kulutustuotteetOsastoIDP = 2L;

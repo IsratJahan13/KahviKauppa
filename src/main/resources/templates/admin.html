@@ -10,23 +10,23 @@
     <header class="header" th:fragment="header">
         <div class="forFlex">
             <div class="site-logo">
-                <img th:src="@{/images/cafeLogo.png}" alt="logo">
-                <a href="index.html" th:href="@{/}" class="etu">Etusivu</a>
+                <figure><img th:src="@{/images/cafeLogo.png}" alt="logo"></figure>
             </div>
             <nav class="nav">
                 <button class="menu-btn">&#9776;</button>
                 <ul class="nav-links">
-                    <li><a th:href="@{/kahviLaitteet(id=1)}">KahviLaitteet</a></li>
-                    <li><a th:href="@{/kahviLaitteet(id=2)}">KulutusTuotteet</a></li>
-                    <li><a href="#" >Rekisteroidy VIP-asiakkaaksi</a></li>
-                    <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinointi (admin)</a></li>
+                    <li><a href="index.html" th:href="@{/}" class="etu">Etusivu</a></li>
+                    <li><a th:href="@{/kahviLaitteet(id=1)}">Kahvilaitteet</a></li>
+                    <li><a th:href="@{/kahviLaitteet(id=2)}">Kulutustuotteet</a></li>
+                    <li><a href="vipAsiakas.html" th:href="@{/vipAsiakas}">Rekisteroidy VIP-asiakkaaksi</a></li>
+                    <li><a href="admin.html" th:href="@{/admin}">Tietojen Hallinnointi (admin)</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out" class="logoutBtn"/>
+            <input type="submit" value="Sign Out" class="logoutBtn" /><i class="fa-solid fa-arrow-right"></i>
         </form>
         <div class="button_h1_flex">
             <h1>Admin</h1>
@@ -35,7 +35,7 @@
                 <button class="btn valmistajat"><a href="valmistajat.html" th:href="@{/valmistajat}">Valmistajat</a></button>
                 <button class="btn toimittajat"><a href="toimittajat.html" th:href="@{/toimittajat}">Toimittajat</a></button>
                 <button class="btn osastot"><a href="osastot.html" th:href="@{/osastot}">Osastot</a></button>
-                <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
+                <button class="btn vip"><a th:href="@{/vipAsiakasAll}">VIP asiakkaat</a></button>
             </div>
         </div>
         <form th:action="@{/admin}" enctype="multipart/form-data" method="POST">
@@ -88,8 +88,8 @@
                 <th>Osasto</th>
                 <th>Toimittaja</th>
                 <th>Valmittaja</th>
-                <th></th>
-                <th></th>
+                <th style="width: 15rem;"></th>
+                <th style="width: 15rem;"></th>
               </tr>
             </thead>
             <tbody>
@@ -99,7 +99,7 @@
                 <td th:text="${tuote.osasto.nimi}">osasto</td>
                 <td th:text="${tuote.toimittaja.nimi}">toimittaja</td>
                 <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
-                <td><button><a class="muokkaBtn" th:href="@{/muokkaaTuote/{id} (id=${tuote.id})}">Muokkaa</a></button></td>
+                <td><button class="muokkaBtn"><a th:href="@{/muokkaaTuote/{id} (id=${tuote.id})}">Muokkaa</a></button></td>
                 <td>
                     <form action="/poistaTuote" method="post">
                         <input type="hidden" name="tuoteId" th:value="${tuote.id}" />

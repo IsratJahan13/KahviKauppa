@@ -34,12 +34,14 @@ table tr:hover {
 }
 .muokkaBtn {
     background-color: rgb(91, 53, 28);
-    color: white;
-    text-decoration: none;
     border-radius: 3px;
     padding: 0.5rem 1rem 0.5rem 1rem;
-    margin: -1rem;
+    margin: 2rem;
     border: none;
+}
+.muokkaBtn a {
+    color: white;
+    text-decoration: none;
 }
 .poistaBtn {
     background-color: #f8dfc1;
@@ -47,6 +49,9 @@ table tr:hover {
     text-decoration: none;
     border-radius: 3px;
     padding: 0.5rem 1rem 0.5rem 1rem;
-    margin: -1rem;
+    margin: auto;
     border: none;
+}
+.poistaBtnForm {
+    margin: 2rem;
 }

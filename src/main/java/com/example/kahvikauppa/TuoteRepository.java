@@ -15,4 +15,7 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
 
     @Query("SELECT t FROM Tuote t WHERE t.osasto IN :osastot")
     Page<Tuote> findByOsastoIn(@Param("osastot") List<Osasto> osastot, Pageable pageable);
+
+    // New method for search functionality by category
+    List<Tuote> findByNimiContainingIgnoreCaseAndOsastoIn(String nimi, List<Osasto> osastot);
 }

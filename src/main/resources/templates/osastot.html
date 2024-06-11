@@ -22,7 +22,7 @@
                 <button class="btn valmistajat"><a href="valmistajat.html" th:href="@{/valmistajat}">Valmistajat</a></button>
                 <button class="btn toimittajat"><a href="toimittajat.html" th:href="@{/toimittajat}">Toimittajat</a></button>
                 <button class="btn osastot" style="background-color: #250505;"><a href="osastot.html" th:href="@{/osastot}">Osastot</a></button>
-                <button class="btn vip"><a href="#">VIP asiakkaat</a></button>
+                <button class="btn vip"><a th:href="@{/vipAsiakasAll}">VIP asiakkaat</a></button>
             </div>
         </div>
         <form th:action="@{/osastot}" method="POST">
@@ -42,17 +42,17 @@
         <tr>
           <th>Osaston nimi</th>
           <th>Osasto ID</th>
-          <th></th>
-          <th></th>
+          <th style="width: 5rem;"></th>
+          <th style="width: 5rem;"></th>
         </tr>
       </thead>
       <tbody>
         <tr  th:each="osasto:${osastot}">
           <td th:text="${osasto.nimi}">nimi</td>
           <td th:text="${osasto.osastoIDP}">osastoIDP</td>
-          <td><button><a class="muokkaBtn" th:href="@{/muokkaaOsasto/{id} (id=${osasto.id})}">Muokkaa</a></button></td>
+          <td><button class="muokkaBtn"><a th:href="@{/muokkaaOsasto/{id} (id=${osasto.id})}">Muokkaa</a></button></td>
           <td>
-            <form th:action="@{/poistaOsasto}" method="post">
+            <form class="poistaBtnForm" th:action="@{/poistaOsasto}" method="post">
                 <input type="hidden" name="osastoId" th:value="${osasto.id}" />
                 <button type="submit" class="poistaBtn">Poistaa</button>
             </form>

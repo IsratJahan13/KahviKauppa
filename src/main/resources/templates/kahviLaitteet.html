@@ -8,6 +8,11 @@
 <body>
     <header th:replace="~{admin::header}" ></header>
     <main class="main">
+        <form class="search" action="#" th:action="@{/search}" method="get">
+            <input type="hidden" name="osastoId" th:value="${osastoId}" />
+            <input type="text" name="query" placeholder="Search products" required>
+            <button type="submit">Search</button>
+        </form>
         <div th:if="${currentPage > 0}">
             <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
                 <button class="edellinen">Edellinen</button>

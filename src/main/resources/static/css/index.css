@@ -47,13 +47,10 @@ body, html {
 .header h3 > a {
     color: rgb(163, 118, 52);
 }
-.nav {
-    position: relative;
-    z-index: 9999;
-}
-.menu-btn {
+/* .menu-btn {
     display: none;
-}.site-logo {
+} */
+.site-logo {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -67,19 +64,6 @@ body, html {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
-}
-.etu {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    padding: 14px 12px 14px 12px;
-    margin-top: 1.2rem;
-    color: white;
-    text-decoration: none;
-}
-.etu:hover {
-    background-color: rgb(91, 53, 28);
-    color: white;
 }
 .nav a {
     color: white;
@@ -95,7 +79,10 @@ body, html {
 .forFlex{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 9999;
+    gap: 29.5rem;
 }
 .picture {
     text-align: center;
@@ -106,7 +93,7 @@ body, html {
     padding-bottom: 1.5rem;
 }
 .project_Section {
-    padding: 4rem;
+    padding: 0 4rem 2rem 4rem;
 }
 .project_Div {
     display: flex;
