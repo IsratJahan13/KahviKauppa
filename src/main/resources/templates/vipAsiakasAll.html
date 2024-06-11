@@ -12,6 +12,9 @@
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out" class="logoutBtn"/>
         </form>
+        <div th:if="${message}" id="messageSection" class="successMessage">
+            <p th:text="${message}"></p>
+        </div>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">
@@ -35,13 +38,32 @@
 
         <tbody>
             <tr th:each="vipAsiakas : ${vipAsiakkaat}">
-            <td th:text="${vipAsiakas.etunimi}">Asiakkaan etunimi</td>
-            <td th:text="${vipAsiakas.sukunimi}">Asiakkaan sukunimi</td>
-            <td th:text="${vipAsiakas.sahkopostiOsoite}">Asiakkaan sähköpostiosoite</td>
+                <td th:text="${vipAsiakas.etunimi}">Asiakkaan etunimi</td>
+                <td th:text="${vipAsiakas.sukunimi}">Asiakkaan sukunimi</td>
+                <td th:text="${vipAsiakas.sahkopostiOsoite}">Asiakkaan sähköpostiosoite</td>
+                <td>
+                    <form th:action="@{/poistaVipAsiakas}" method="post">
+                        <input type="hidden" name="vipAsiakasId" th:value="${vipAsiakas.id}" />
+                        <button type="submit" class="poistaBtn">Poistaa</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
         </table>
     <footer th:replace="~{admin::footer}"></footer>
-
+    <script>
+        // Wait for the document to be ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the message section
+            var messageSection = document.getElementById('messageSection');
+            // If the message section exists
+            if (messageSection) {
+                // Set a timeout to hide the message after 2 seconds
+                setTimeout(function() {
+                    messageSection.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
