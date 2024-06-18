@@ -26,7 +26,6 @@ public class ToimittajaController {
     public String createToimittaja(@RequestParam String nimi, @RequestParam String yhteyshenkilo,
             @RequestParam String yhteyshenkilonEmail) {
         this.toimittajaService.createToimittaja(nimi, yhteyshenkilo, yhteyshenkilonEmail);
-
         return "redirect:/toimittajat";
     }
 

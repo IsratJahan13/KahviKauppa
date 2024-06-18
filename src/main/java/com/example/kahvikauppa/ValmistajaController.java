@@ -16,13 +16,8 @@ public class ValmistajaController {
     private ValmistajaService valmistajaService;
 
     @GetMapping("/valmistajat")
-    public String getValmistajat(Model model, @ModelAttribute("message") String message) {
+    public String getValmistajat(Model model) {
         model.addAttribute("valmistajat", valmistajaService.valmistajaList());
-        if (!message.isEmpty()) {
-            model.addAttribute("message", message);
-        } else {
-            model.addAttribute("message", false);
-        }
         return "valmistajat";
     }
 

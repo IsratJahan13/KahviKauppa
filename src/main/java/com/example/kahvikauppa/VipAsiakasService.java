@@ -12,6 +12,20 @@ public class VipAsiakasService {
         return vipAsiakasRepo.findById(id).orElse(null);
     }
 
+    public VipAsiakas createVipAsiakas(String etunimi, String sukunimi,
+            String sahkopostiOsoite) {
+        VipAsiakas vipAsiakas = this.vipAsiakasRepo.findBySahkopostiOsoite(sahkopostiOsoite);
+        if (vipAsiakas != null) {
+            return vipAsiakas;
+        } else {
+            VipAsiakas newVipAsiakas = new VipAsiakas();
+            newVipAsiakas.setEtunimi(etunimi);
+            newVipAsiakas.setSukunimi(sukunimi);
+            newVipAsiakas.setSahkopostiOsoite(sahkopostiOsoite);
+            return vipAsiakasRepo.save(newVipAsiakas);
+        }
+    }
+
     public void deleteVipAsiakas(Long vipAsiakasId) {
         vipAsiakasRepo.deleteById(vipAsiakasId);
     }

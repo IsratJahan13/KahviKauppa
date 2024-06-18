@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
-<head>
-    <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" th:href="@{/css/reset.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}" />
-    <link rel="stylesheet" type="text/css" href="../static/css/table.css" th:href="@{/css/table.css}" />
-</head>
+<head th:replace="~{admin::head}"></head>
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out" class="logoutBtn"/>
-        </form>
+        <form th:replace="~{admin::sign-out}" th:action="@{/logout}" method="post"></form>
         <div class="button_h1_flex">
             <h1>Admin</h1>
             <div class="btns">
@@ -32,7 +25,7 @@
                 <label>Osasto ID:</label>
                 <input type="text" name="osastoIDP" th:value="${osasto.osastoIDP}" placeholder="" style="width: 20rem">
             </div>
-            <button type="submit" value="submit" class="btn">Päivitää</button>
+            <button type="submit" value="submit" class="btn">Päivitä</button>
         </form>
     </main>
     <footer th:replace="~{admin::footer}"></footer>

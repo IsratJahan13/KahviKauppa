@@ -29,12 +29,12 @@ public class VipAsiakasController {
 
     @PostMapping("/vipAsiakas")
     public String createVipAsiakas(@RequestParam String etunimi, @RequestParam String sukunimi,
-            @RequestParam String sahkopostiOsoite) {
-        VipAsiakas vipAsiakas = new VipAsiakas();
-        vipAsiakas.setEtunimi(etunimi);
-        vipAsiakas.setSukunimi(sukunimi);
-        vipAsiakas.setSahkopostiOsoite(sahkopostiOsoite);
-        vipAsiakasRepo.save(vipAsiakas);
+            @RequestParam String sahkopostiOsoite, RedirectAttributes redirectAttributes) {
+        this.vipAsiakasService.createVipAsiakas(etunimi, sukunimi, sahkopostiOsoite);
+
+        // Add success message to redirect attributes
+        redirectAttributes.addFlashAttribute("message", "Successfully added");
+
         return "redirect:/vipAsiakas";
     }
 

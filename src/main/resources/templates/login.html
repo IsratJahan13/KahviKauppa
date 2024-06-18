@@ -9,10 +9,10 @@
     <header th:replace="~{admin::header}" ></header>
     <main class="main">
         <div th:if="${param.error}">
-            Invalid username and password.
+            Väärä käyttäjätunnus tai salasana.
         </div>
         <div th:if="${param.logout}">
-            You have been logged out.
+            Sinut on kirjattu ulos.
         </div>
         <form th:action="@{/login}" method="POST">
             <h3>Kirjaudu sisään:</h3>

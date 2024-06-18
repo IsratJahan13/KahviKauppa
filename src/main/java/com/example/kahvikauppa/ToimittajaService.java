@@ -1,13 +1,10 @@
 package com.example.kahvikauppa;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class ToimittajaService {
@@ -22,13 +19,18 @@ public class ToimittajaService {
         return toimittajaRepo.findById(id).orElse(null);
     }
 
-    public void createToimittaja(String nimi, String yhteyshenkilo,
+    public Toimittaja createToimittaja(String nimi, String yhteyshenkilo,
             String yhteyshenkilonEmail) {
-        Toimittaja toimittaja = new Toimittaja();
-        toimittaja.setNimi(nimi);
-        toimittaja.setYhteyshenkilo(yhteyshenkilo);
-        toimittaja.setYhteyshenkilonEmail(yhteyshenkilonEmail);
-        toimittajaRepo.save(toimittaja);
+        Toimittaja existingToimittaja = this.toimittajaRepo.findByNimi(nimi);
+        if (existingToimittaja != null) {
+            return existingToimittaja;
+        } else {
+            Toimittaja toimittaja = new Toimittaja();
+            toimittaja.setNimi(nimi);
+            toimittaja.setYhteyshenkilo(yhteyshenkilo);
+            toimittaja.setYhteyshenkilonEmail(yhteyshenkilonEmail);
+            return this.toimittajaRepo.save(toimittaja);
+        }
     }
 
     public void getMuokkaaToimittaja(Long id, Model model) {
@@ -36,15 +38,16 @@ public class ToimittajaService {
         model.addAttribute("toimittaja", toimittaja);
     }
 
-    public void muokkaaToimittaja(Long id, String nimi,
+    public Toimittaja muokkaaToimittaja(Long id, String nimi,
             String yhteyshenkilo, String yhteyshenkilonEmail) {
         Toimittaja toimittaja = toimittajaRepo.findById(id).orElse(null);
         if (toimittaja != null) {
             toimittaja.setNimi(nimi);
             toimittaja.setYhteyshenkilo(yhteyshenkilo);
             toimittaja.setYhteyshenkilonEmail(yhteyshenkilonEmail);
-            toimittajaRepo.save(toimittaja);
+            return this.toimittajaRepo.save(toimittaja);
         }
+        return null;
     }
 
     // public void deleteToimittaja(Long toimittajaId) {

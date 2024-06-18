@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
-<head>
-    <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/tuoteSivu.css}" />
-</head>
+<head th:replace="~{admin::head}"></head>
 <body>
     <header th:replace="~{admin::header}" ></header>
     <main>

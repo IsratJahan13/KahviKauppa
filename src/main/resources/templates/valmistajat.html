@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
-<head>
-    <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/admin.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/table.css}" />
-</head>
+<head th:replace="~{admin::head}"></head>
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
     <main>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out" class="logoutBtn"/>
-        </form>
+        <form th:replace="~{admin::sign-out}" th:action="@{/logout}" method="post"></form>
         <section id="messageSection" th:if="${message}" th:class="${message.startsWith('Valmistaja poistettiin')? 'successMessage' : 'errorMessage'}">
             <p th:text="${message}"></p>
         </section>
@@ -37,6 +30,7 @@
             </div>
             <button type="submit" value="submit" class="btn lisaa">Lisää</button>
         </form>
+        <p th:if="${message}" th:text="${message}"></p>
         <table>
             <thead>
               <tr>
@@ -54,7 +48,7 @@
                 <td>
                     <form th:action="@{/poistaValmistaja}" method="post">
                         <input type="hidden" name="valmistajaId" th:value="${valmistaja.id}" />
-                        <button type="submit" class="poistaBtn">Poistaa</button>
+                        <button type="submit" class="poistaBtn">Poista</button>
                     </form>
                 </td>
               </tr>
@@ -72,7 +66,7 @@
                 // Set a timeout to hide the message after 2 seconds
                 setTimeout(function() {
                     messageSection.style.display = 'none';
-                }, 3000);
+                }, 2000);
             }
         });
     </script>

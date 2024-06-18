@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
-<head>
-    <title>Israt Cafe</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/admin.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/table.css}" />
-</head>
+<head th:replace="~{admin::head}"></head>
 <body>
     <header class="header" th:replace="~{admin::header}"></header>
-    <main>
+    <main class="main2">
         <div>
-            <form th:action="@{/vipAsiakas}" method="POST">
+            <p class="successfullyAdded" th:if="${message}" th:text="${message}" id="successMessage"></p>
+            <form id="vipForm" th:action="@{/vipAsiakas}" method="POST">
                 <h3 class="form_h3">Lisää uusi VIP-asiakas:</h3>
                 <div class="form_flex">
                     <label for="firstname">Etunimi:</label>
@@ -20,13 +16,24 @@
                     <label for="lastname">Sukunimi:</label>
                     <input type="text" name="sukunimi" style="width: 20rem;" required />
                 </div>
-                <div class="form_flex"> 
+                <div class= "form_flex"> 
                     <label for="email">Sähköpostiosoite:</label>
                     <input type="email" name="sahkopostiOsoite" style="width: 20rem;" required />
                 </div>
                 <button type="submit" value="submit" class="btn lisaa for_gap_below">Lisää</button>
             </form>
           </div>
+    </main>
     <footer th:replace="~{admin::footer}"></footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 2000); // 2000 milliseconds = 2 seconds
+            }
+        });
+    </script>
 </body>
 </html>
