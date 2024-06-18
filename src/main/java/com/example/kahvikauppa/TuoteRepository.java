@@ -18,4 +18,11 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
 
     // New method for search functionality by category
     List<Tuote> findByNimiContainingIgnoreCaseAndOsastoIn(String nimi, List<Osasto> osastot);
+
+    @Query("SELECT t FROM Tuote t WHERE t.osasto IN :osastot ORDER BY "
+            + "CASE WHEN :filterHinta = 'asc' THEN t.hinta END ASC, "
+            + "CASE WHEN :filterHinta = 'desc' THEN t.hinta END DESC")
+    Page<Tuote> findByHintaFilter(@Param("osastot") List<Osasto> osastot,
+            @Param("filterHinta") String filterHinta,
+            Pageable pageable);
 }

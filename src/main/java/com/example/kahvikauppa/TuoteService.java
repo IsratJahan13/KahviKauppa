@@ -188,4 +188,8 @@ public class TuoteService {
     public List<Tuote> searchProducts(String query, List<Osasto> osastot) {
         return tuotteetRepo.findByNimiContainingIgnoreCaseAndOsastoIn(query, osastot);
     }
+
+    public Page<Tuote> findByHintaFilter(List<Osasto> osastoList, String filterHinta, Pageable pageable) {
+        return tuotteetRepo.findByHintaFilter(osastoList, filterHinta, pageable);
+    }
 }

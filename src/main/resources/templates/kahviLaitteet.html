@@ -10,32 +10,22 @@
     <main class="main">
         <form class="search" action="#" th:action="@{/search}" method="get">
             <input type="hidden" name="osastoId" th:value="${osastoId}" />
-            <input type="text" name="query" placeholder="Search products" required>
-            <button type="submit">Search</button>
+            <input type="text" name="query" placeholder="Etsiä tuotteita" required>
+            <button type="submit">Hae</button>
         </form>
         <form class="filters" action="#" th:action="@{/kahviLaitteet}" method="get">
             <input type="hidden" name="id" th:value="${osastoId}" />
             
             <select name="filterHinta">
-                <option value="">Filter by Hinta</option>
-                <option value="asc" th:selected="${filterHinta == 'asc'}">Hinta (Low to High)</option>
-                <option value="desc" th:selected="${filterHinta == 'desc'}">Hinta (High to Low)</option>
+                <option value="">Suodattaa hinnan mukaan</option>
+                <option value="asc" th:selected="${filterHinta == 'asc'}">Hinta (Alhaisesta korkeaan)</option>
+                <option value="desc" th:selected="${filterHinta == 'desc'}">Hinta (korkeasta matalaan)</option>
             </select>
             
-            <select name="filterOsasto">
-                <option value="">Filter by Osasto</option>
-                <option th:each="osasto : ${osastot}" th:value="${osasto.id}" th:text="${osasto.nimi}" th:selected="${filterOsasto == osasto.id}"></option>
-            </select>
-            
-            <select name="filterValmistaja">
-                <option value="">Filter by Valmistaja</option>
-                <option th:each="valmistaja : ${valmistajat}" th:value="${valmistaja}" th:text="${valmistaja}" th:selected="${filterValmistaja == valmistaja}"></option>
-            </select>
-            
-            <button type="submit">Apply Filters</button>
+            <button type="submit">Suodattaa</button>
         </form>
         <div th:if="${currentPage > 0}">
-            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
+            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1}, filterHinta=${filterHinta})}">
                 <button class="edellinen">Edellinen</button>
             </a>
         </div>
@@ -54,7 +44,7 @@
             </div>
         </div>
         <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
-            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage + 1})}">
+            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage + 1}, filterHinta=${filterHinta})}">
                 <button class="seurava">Seuraava</button>
             </a>
         </div>

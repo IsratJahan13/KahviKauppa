@@ -38,17 +38,27 @@ public class KahviKauppaController {
     }
 
     @GetMapping("/kahviLaitteet")
-    public String getKahviLaitteet(Model model, @RequestParam("id") long osastoId,
-            @RequestParam(defaultValue = "0") int page) {
+    public String getKahviLaitteet(Model model,
+            @RequestParam("id") long osastoId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "name") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDir,
+            @RequestParam(required = false) String filterHinta) {
         int pageSize = 6;
 
         // Get the current department
         Osasto department = osastoService.getOne(osastoId);
         List<Osasto> departmentTree = getDepartmentsTree(department);
 
-        // Use custom query to fetch paginated Tuote objects for the department tree
+        // Filter logic
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Tuote> tuotePage = tuoteService.findByOsastoIn(departmentTree, pageable);
+        Page<Tuote> tuotePage;
+
+        if (filterHinta != null && !filterHinta.isEmpty()) {
+            tuotePage = tuoteService.findByHintaFilter(departmentTree, filterHinta, pageable);
+        } else {
+            tuotePage = tuoteService.findByOsastoIn(departmentTree, pageable);
+        }
 
         model.addAttribute("depName", department.getNimi());
         model.addAttribute("osastoId", osastoId);
@@ -60,6 +70,9 @@ public class KahviKauppaController {
         // Add count of products to the model
         long totalKahviLaitteet = tuoteService.countTotalProducts(departmentTree);
         model.addAttribute("totalKahviLaitteet", totalKahviLaitteet);
+
+        // Add filter options to the model
+        model.addAttribute("filterHinta", filterHinta);
 
         return "kahviLaitteet";
     }
