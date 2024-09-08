@@ -1,10 +1,11 @@
-
 .img img {
     width: 50%;
     height: 30%;
 }
+
 .container {
     margin: 4rem 0 3rem 5rem;
+    
 }
 .container h1{
     padding-top: 3rem;

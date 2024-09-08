@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -87,7 +86,7 @@ public class KahviKauppaController {
         // Search products based on the query and department tree
         List<Tuote> searchResults = tuoteService.searchProducts(query, departmentTree);
 
-        model.addAttribute("depName", department.getNimi() + " Search Results");
+        model.addAttribute("depName", department.getNimi() + " hakutulos");
         model.addAttribute("osastoId", osastoId);
         model.addAttribute("tuotteet", searchResults);
 
