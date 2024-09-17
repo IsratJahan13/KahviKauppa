@@ -17,12 +17,12 @@
             <input type="hidden" name="id" th:value="${osastoId}" />
             
             <select name="filterHinta">
-                <option value="">Suodattaa hinnan mukaan</option>
+                <option value="" disabled selected hidden>Lajittele hinnan mukaan</option>
                 <option value="asc" th:selected="${filterHinta == 'asc'}">Hinta (Alhaisesta korkeaan)</option>
                 <option value="desc" th:selected="${filterHinta == 'desc'}">Hinta (korkeasta matalaan)</option>
             </select>
             
-            <button type="submit">Suodattaa</button>
+            <button type="submit">Lajittele</button>
         </form>
         <div th:if="${currentPage > 0}">
             <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1}, filterHinta=${filterHinta})}">
